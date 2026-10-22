@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "OnionNames",
+  "version": "0.0.0",
+  "description": "Resolve human-readable .alt aliases to Tor onion services. Mappings stay in your browser; OnionNames collects or transmits no data.",
+  "homepage_url": "https://github.com/pietro-a/onion-names",
+  "icons": {
+    "32": "icons/onion-names.svg",
+    "64": "icons/onion-names.svg"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "onion-names@pietro-a.github.com",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "action": {
+    "default_icon": "icons/onion-names.svg",
+    "default_title": "OnionNames"
+  },
+  "options_ui": {
+    "page": "options/mapping.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "permissions": ["storage", "webRequest", "webRequestBlocking"],
+  "host_permissions": ["*://*.alt/*"]
+}
