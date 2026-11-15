@@ -1,0 +1,191 @@
+:root {
+  color-scheme: light dark;
+  font:
+    13px/1.4 system-ui,
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 380px;
+  margin: 0;
+  color: CanvasText;
+  background: Canvas;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+.popup {
+  padding: 14px;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid GrayText;
+}
+
+h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+h2 {
+  margin: 14px 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.count {
+  color: GrayText;
+  font-size: 12px;
+}
+
+.mapping-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 190px;
+  overflow-y: auto;
+}
+
+.mapping-row {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid GrayText;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mapping-row:hover {
+  background: color-mix(in srgb, CanvasText 6%, Canvas);
+}
+
+.mapping-row[aria-pressed="true"] {
+  outline: 1px solid CanvasText;
+  outline-offset: -2px;
+  background: color-mix(in srgb, CanvasText 8%, Canvas);
+}
+
+.mapping-alias {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.mapping-destination {
+  margin-top: 3px;
+  color: GrayText;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.arrow {
+  padding: 0 4px;
+}
+
+.empty {
+  margin: 0;
+  padding: 12px 8px;
+  border: 1px solid GrayText;
+  color: GrayText;
+}
+
+.editor {
+  margin-top: 16px;
+  padding-top: 2px;
+  border-top: 1px solid GrayText;
+}
+
+label {
+  display: block;
+  margin: 10px 0 4px;
+  font-weight: 500;
+}
+
+.hostname-field {
+  display: flex;
+  min-width: 0;
+  border: 1px solid GrayText;
+}
+
+.hostname-field:focus-within {
+  outline: 2px solid Highlight;
+  outline-offset: 1px;
+}
+
+.hostname-field input {
+  width: 0;
+  min-width: 0;
+  flex: 1;
+  padding: 7px 8px;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+}
+
+.suffix {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border-left: 1px solid GrayText;
+  color: GrayText;
+  white-space: nowrap;
+}
+
+.message {
+  min-height: 18px;
+  margin: 8px 0 0;
+  color: GrayText;
+  overflow-wrap: anywhere;
+}
+
+.message.error {
+  color: #c62828;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.actions button {
+  min-height: 30px;
+  padding: 5px 12px;
+  border: 1px solid GrayText;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background: color-mix(in srgb, CanvasText 8%, Canvas);
+}
+
+.actions button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.actions .danger {
+  margin-left: auto;
+}
+
+[hidden] {
+  display: none !important;
+}

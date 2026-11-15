@@ -1,16 +1,13 @@
-
 {
   "manifest_version": 3,
   "name": "OnionNames",
   "version": "0.1.0",
   "description": "Create local, human-readable aliases for Tor onion services.",
   "homepage_url": "https://github.com/pietro-a/onion-names",
-
   "icons": {
     "32": "icons/onion-names.svg",
     "64": "icons/onion-names.svg"
   },
-
   "browser_specific_settings": {
     "gecko": {
       "id": "onion-names@pietro-a.github.com",
@@ -19,12 +16,14 @@
       }
     }
   },
-
+  "action": {
+    "default_icon": "icons/onion-names.svg",
+    "default_title": "OnionNames",
+    "default_popup": "popup/mapping.html"
+  },
   "background": {
     "scripts": ["js/background.js"]
   },
-
-  "permissions": ["webRequest", "webRequestBlocking"],
-
+  "permissions": ["storage", "webRequest", "webRequestBlocking"],
   "host_permissions": ["*://*.alt/*"]
 }

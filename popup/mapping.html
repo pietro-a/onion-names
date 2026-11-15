@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OnionNames</title>
+    <link rel="stylesheet" href="mapping.css" />
+    <script src="mapping.js" defer></script>
+  </head>
+  <body>
+    <main class="popup">
+      <header class="header">
+        <h1>OnionNames</h1>
+        <span class="count" id="count">0 mappings</span>
+      </header>
+
+      <section aria-labelledby="mappings-heading">
+        <h2 id="mappings-heading">Mappings</h2>
+        <div id="mapping-list" class="mapping-list">
+          <p class="empty">Loading mappings…</p>
+        </div>
+      </section>
+
+      <section class="editor" aria-labelledby="editor-heading">
+        <h2 id="editor-heading">Add mapping</h2>
+
+        <form id="mapping-form">
+          <label for="alias">Alias</label>
+          <div class="hostname-field">
+            <input
+              id="alias"
+              name="alias"
+              type="text"
+              placeholder="alias"
+              maxlength="63"
+              autocomplete="off"
+              autocapitalize="none"
+              spellcheck="false"
+              required
+            />
+            <span class="suffix">.alt</span>
+          </div>
+
+          <label for="onion">Onion address</label>
+          <div class="hostname-field">
+            <input
+              id="onion"
+              name="onion"
+              type="text"
+              placeholder="56-character v3 address"
+              maxlength="56"
+              autocomplete="off"
+              autocapitalize="none"
+              spellcheck="false"
+              required
+            />
+            <span class="suffix">.onion</span>
+          </div>
+
+          <p id="message" class="message" role="status" aria-live="polite"></p>
+
+          <div class="actions">
+            <button id="submit-button" type="submit">Add</button>
+            <button id="cancel-button" type="button" hidden>Cancel</button>
+            <button id="delete-button" class="danger" type="button" hidden>
+              Delete
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
