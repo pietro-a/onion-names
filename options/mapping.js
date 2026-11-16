@@ -45,6 +45,7 @@
       input: aliasInput,
       error: document.getElementById("alias-error"),
       validate(value) {
+        if (value === "") return "Alias is required.";
         if (!ALIAS_PATTERN.test(value))
           return "Use one label containing letters, digits and internal hyphens only.";
         const full = value + ".alt";
@@ -58,6 +59,7 @@
       input: onionInput,
       error: document.getElementById("onion-error"),
       validate(value) {
+        if (value === "") return "Onion address is required.";
         return ONION_PATTERN.test(value)
           ? ""
           : "Enter exactly 56 Base32 characters (a–z or digits 2–7).";
