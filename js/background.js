@@ -39,7 +39,7 @@
   }
 
   browser.storage.onChanged.addListener((changes, areaName) => {
-    if (areaName !== "local" || !Object.hasOwn(changes, STORAGE_KEY)) {
+    if (areaName !== "local" || !Object.prototype.hasOwnProperty.call(changes, STORAGE_KEY)) {
       return;
     }
 
