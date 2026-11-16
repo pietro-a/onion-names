@@ -100,7 +100,6 @@
     const onionValid = validateField(fields.onion);
 
     if (!aliasValid || !onionValid) {
-      (aliasValid ? onionInput : aliasInput).focus();
       return null;
     }
 
@@ -123,7 +122,7 @@
       query = search.value.trim().toLowerCase();
 
     const filtered = entries.filter(([a, o]) =>
-      (a + " " + o).toLowerCase().includes(query),
+      a.slice(0, -4).toLowerCase().includes(query),
     );
 
     count.textContent =
