@@ -44,8 +44,9 @@
     alias: {
       input: aliasInput,
       error: document.getElementById("alias-error"),
+      requiredMessage: "Alias is required.",
       validate(value) {
-        if (value === "") return "Alias is required.";
+        if (value === "") return this.requiredMessage;
         if (!ALIAS_PATTERN.test(value))
           return "Use one label containing letters, digits and internal hyphens only.";
         const full = value + ".alt";
@@ -58,8 +59,9 @@
     onion: {
       input: onionInput,
       error: document.getElementById("onion-error"),
+      requiredMessage: "Onion address is required.",
       validate(value) {
-        if (value === "") return "Onion address is required.";
+        if (value === "") return this.requiredMessage;
         return ONION_PATTERN.test(value)
           ? ""
           : "Enter exactly 56 Base32 characters (a–z or digits 2–7).";
@@ -247,6 +249,14 @@
   }
 
   for (const field of Object.values(fields)) {
+    field.input.addEventListener("focus", () => {
+      if (
+        field.input.value.trim() === "" &&
+        field.error.textContent === field.requiredMessage
+      ) {
+        clearFieldError(field);
+      }
+    });
     field.input.addEventListener("blur", () => validateField(field));
     field.input.addEventListener("input", () => {
       if (field.error.classList.contains("visible"))
