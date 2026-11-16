@@ -18,8 +18,11 @@
   },
   "action": {
     "default_icon": "icons/onion-names.svg",
-    "default_title": "OnionNames",
-    "default_popup": "popup/mapping.html"
+    "default_title": "OnionNames"
+  },
+  "options_ui": {
+    "page": "options/mapping.html",
+    "open_in_tab": true
   },
   "background": {
     "scripts": ["js/background.js"]
