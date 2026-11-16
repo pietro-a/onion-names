@@ -1,28 +1,116 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OnionNames — Mappings</title><link rel="stylesheet" href="mapping.css"><script src="mapping.js" defer></script>
-</head>
-<body>
-<main class="page">
-<header class="page-header"><div><h1>OnionNames</h1><p class="subtitle">Local aliases for Tor onion services</p></div><button id="add-button" class="primary" type="button">Add mapping</button></header>
-<section aria-labelledby="mappings-heading">
-<div class="section-heading"><h2 id="mappings-heading">Mappings</h2><span id="count" class="count">Loading…</span></div>
-<label class="search-label" for="search">Search mappings</label><input id="search" class="search" type="search" placeholder="Search aliases or onion addresses" autocomplete="off" spellcheck="false">
-<div class="table-wrap"><table><thead><tr><th scope="col">Alias</th><th scope="col">Onion address</th><th scope="col" class="actions-heading">Actions</th></tr></thead><tbody id="mapping-list"><tr><td colspan="3" class="empty">Loading mappings…</td></tr></tbody></table></div>
-</section>
-<section id="editor" class="editor" aria-labelledby="editor-heading">
-<div class="section-heading"><h2 id="editor-heading">Add mapping</h2><button id="cancel-button" class="quiet" type="button" hidden>Cancel</button></div>
-<form id="mapping-form" novalidate>
-<div class="form-grid">
-<div class="field"><label for="alias">Alias</label><div class="hostname-field"><input id="alias" name="alias" type="text" placeholder="ddg" maxlength="63" autocomplete="off" autocapitalize="none" spellcheck="false" required aria-describedby="alias-hint alias-error"><span class="suffix">.alt</span></div><p id="alias-hint" class="hint">One label only; letters, digits and internal hyphens.</p><p id="alias-error" class="field-error" aria-live="polite"></p></div>
-<div class="field"><label for="onion">v3 onion address</label><div class="hostname-field"><input id="onion" name="onion" type="text" placeholder="56-character address" maxlength="56" autocomplete="off" autocapitalize="none" spellcheck="false" required aria-describedby="onion-hint onion-error"><span class="suffix">.onion</span></div><p id="onion-hint" class="hint">Exactly 56 Base32 characters (a–z, 2–7).</p><p id="onion-error" class="field-error" aria-live="polite"></p></div>
-</div>
-<p id="message" class="message" role="status" aria-live="polite"></p>
-<div class="form-actions"><button id="submit-button" class="primary" type="submit">Save mapping</button><button id="delete-button" class="danger" type="button" hidden>Delete mapping</button></div>
-</form>
-</section>
-</main>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OnionNames — Mappings</title>
+    <link rel="stylesheet" href="mapping.css" />
+    <script src="mapping.js" defer></script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="page-header">
+        <div>
+          <h1>OnionNames</h1>
+          <p class="subtitle">Local aliases for Tor onion services</p>
+        </div>
+        <button id="add-button" class="primary" type="button">
+          Add mapping
+        </button>
+      </header>
+      <section aria-labelledby="mappings-heading">
+        <div class="section-heading">
+          <h2 id="mappings-heading">Mappings</h2>
+          <span id="count" class="count">Loading…</span>
+        </div>
+        <label class="search-label" for="search">Search mappings</label
+        ><input
+          id="search"
+          class="search"
+          type="search"
+          placeholder="Search aliases or onion addresses"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Alias</th>
+                <th scope="col">Onion address</th>
+                <th scope="col" class="actions-heading">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="mapping-list">
+              <tr>
+                <td colspan="3" class="empty">Loading mappings…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section id="editor" class="editor" aria-labelledby="editor-heading">
+        <div class="section-heading">
+          <h2 id="editor-heading">Add mapping</h2>
+          <button id="cancel-button" class="quiet" type="button" hidden>
+            Cancel
+          </button>
+        </div>
+        <form id="mapping-form" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="alias">Alias</label>
+              <div class="hostname-field">
+                <input
+                  id="alias"
+                  name="alias"
+                  type="text"
+                  placeholder="63-character alias"
+                  maxlength="63"
+                  autocomplete="off"
+                  autocapitalize="none"
+                  spellcheck="false"
+                  required
+                  aria-describedby="alias-hint alias-error"
+                /><span class="suffix">.alt</span>
+              </div>
+              <p id="alias-hint" class="hint">
+                One label only; letters, digits and internal hyphens.
+              </p>
+              <p id="alias-error" class="field-error" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="onion">v3 onion address</label>
+              <div class="hostname-field">
+                <input
+                  id="onion"
+                  name="onion"
+                  type="text"
+                  placeholder="56-character address"
+                  maxlength="56"
+                  autocomplete="off"
+                  autocapitalize="none"
+                  spellcheck="false"
+                  required
+                  aria-describedby="onion-hint onion-error"
+                /><span class="suffix">.onion</span>
+              </div>
+              <p id="onion-hint" class="hint">
+                Exactly 56 Base32 characters (a–z, 2–7).
+              </p>
+              <p id="onion-error" class="field-error" aria-live="polite"></p>
+            </div>
+          </div>
+          <p id="message" class="message" role="status" aria-live="polite"></p>
+          <div class="form-actions">
+            <button id="submit-button" class="primary" type="submit">
+              Save mapping</button
+            ><button id="delete-button" class="danger" type="button" hidden>
+              Delete mapping
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
 </html>
