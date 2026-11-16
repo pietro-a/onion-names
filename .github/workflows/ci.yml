@@ -7,7 +7,6 @@ on:
   push:
     branches:
       - main
-      - "v*"
 
 permissions:
   contents: read
@@ -60,29 +59,3 @@ jobs:
 
           console.log(`Manifest is valid; checked ${references.length} file reference(s).`);
           NODE
-
-  release:
-    name: Package and publish release
-    needs: validate
-    if: startsWith(github.ref, 'refs/tags/v')
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
-    steps:
-      - name: Check out tagged version
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref }}
-
-      - name: Create extension ZIP
-        run: |
-          VERSION="${GITHUB_REF_NAME}"
-          git archive --format=zip --output="onion-names-${VERSION}.zip" HEAD \
-            manifest.json README.md LICENSE icons js options
-
-      - name: Publish GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
-          files: onion-names-${{ github.ref_name }}.zip
