@@ -21,6 +21,7 @@
 
   let aliases = {};
   let editingAlias = null;
+  let storageRevision = 0;
 
   function hasOwn(object, key) {
     return Object.prototype.hasOwnProperty.call(object, key);
@@ -233,6 +234,7 @@
   browser.storage.onChanged.addListener((changes, areaName) => {
     if (areaName !== "local" || !hasOwn(changes, STORAGE_KEY)) return;
 
+    storageRevision += 1;
     const value = changes[STORAGE_KEY].newValue;
     aliases =
       value && typeof value === "object" && !Array.isArray(value) ? value : {};
@@ -245,10 +247,15 @@
   });
 
   async function loadMappings() {
+    const revisionAtStart = storageRevision;
     const stored = await browser.storage.local.get(STORAGE_KEY);
     const value = stored[STORAGE_KEY];
-    aliases =
-      value && typeof value === "object" && !Array.isArray(value) ? value : {};
+
+    if (revisionAtStart === storageRevision) {
+      aliases =
+        value && typeof value === "object" && !Array.isArray(value) ? value : {};
+    }
+
     renderList();
   }
 
