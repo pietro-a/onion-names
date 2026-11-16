@@ -2,8 +2,8 @@
   "use strict";
 
   const STORAGE_KEY = "aliases";
-  const ALIAS_PATTERN = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.alt$/;
-  const ONION_PATTERN = /^[a-z2-7]{56}\\.onion$/;
+  const ALIAS_PATTERN = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.alt$/;
+  const ONION_PATTERN = /^[a-z2-7]{56}\.onion$/;
 
   let aliases = Object.create(null);
   let mappingsReady = false;
@@ -68,7 +68,7 @@
       }
 
       // The label immediately before ".alt" is the mapped alias.
-      const alias = `${labels[labels.length - 2]}.alt`;
+      const alias = labels[labels.length - 2] + ".alt";
       const onion = aliases[alias];
 
       if (!onion) {
