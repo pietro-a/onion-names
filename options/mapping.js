@@ -44,6 +44,7 @@
     alias: {
       input: aliasInput,
       error: document.getElementById("alias-error"),
+      requiredMessage: "Alias is required.",
       validate(value) {
         if (value === "") return "Alias is required.";
         if (!ALIAS_PATTERN.test(value))
@@ -58,6 +59,7 @@
     onion: {
       input: onionInput,
       error: document.getElementById("onion-error"),
+      requiredMessage: "Onion address is required.",
       validate(value) {
         if (value === "") return "Onion address is required.";
         return ONION_PATTERN.test(value)
@@ -247,6 +249,14 @@
   }
 
   for (const field of Object.values(fields)) {
+    field.input.addEventListener("focus", () => {
+      if (
+        field.input.value.trim() === "" &&
+        field.error.textContent === field.requiredMessage
+      ) {
+        clearFieldError(field);
+      }
+    });
     field.input.addEventListener("blur", () => validateField(field));
     field.input.addEventListener("input", () => {
       if (field.error.classList.contains("visible"))
