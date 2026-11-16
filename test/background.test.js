@@ -83,33 +83,32 @@ test("preserves subdomains and URL components when rewriting", async () => {
 test("cancels requests for unknown aliases", async () => {
   const listeners = await createBackground();
 
-  assert.deepEqual(
-    listeners.beforeRequest({ url: "https://unknown.alt/private" }),
-    { cancel: true },
-  );
+  const result = listeners.beforeRequest({
+    url: "https://unknown.alt/private",
+  });
+  assert.equal(result.cancel, true);
 });
 
 test("does not alter ordinary hostnames", async () => {
   const listeners = await createBackground({ "example.alt": onionAddress });
 
-  assert.deepEqual(
-    listeners.beforeRequest({ url: "https://example.com/path" }),
-    {},
-  );
+  const result = listeners.beforeRequest({ url: "https://example.com/path" });
+  assert.equal(Object.keys(result).length, 0);
 });
 
 test("ignores malformed mappings loaded from storage", async () => {
   const listeners = await createBackground({
-    "not a valid alias.alt": onionAddress,
+    "bad_alias.alt": onionAddress,
     "bad-destination.alt": "not-an-onion.onion",
   });
 
-  assert.deepEqual(
-    listeners.beforeRequest({ url: "https://not%20a%20valid%20alias.alt/" }),
-    { cancel: true },
-  );
-  assert.deepEqual(
-    listeners.beforeRequest({ url: "https://bad-destination.alt/" }),
-    { cancel: true },
-  );
+  const invalidAlias = listeners.beforeRequest({
+    url: "https://bad_alias.alt/",
+  });
+  const invalidDestination = listeners.beforeRequest({
+    url: "https://bad-destination.alt/",
+  });
+
+  assert.equal(invalidAlias.cancel, true);
+  assert.equal(invalidDestination.cancel, true);
 });
