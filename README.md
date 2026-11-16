@@ -28,7 +28,7 @@ OnionNames validates hostname syntax only. It does not look up DNS records, cont
 
 ## Managing mappings
 
-Click the OnionNames toolbar button to open the mapping manager in a tab. You can add, edit, delete, sort, and search mappings by alias or onion address.
+Click the OnionNames toolbar button to open the mapping manager in a tab. Mappings are listed alphabetically. You can add, edit, delete, and search by alias or onion address.
 
 The manager accepts:
 - An alias label containing letters, digits, and internal hyphens, followed by the fixed `.alt` suffix.
