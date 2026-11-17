@@ -15,9 +15,18 @@ jobs:
 
     steps:
       - name: Check out tagged version
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.ref }}
+
+      - name: Validate release tag
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\\.[0-9]+\\.[0-9]+$ ]]; then
+            echo "Release tag must use stable semantic version format: vMAJOR.MINOR.PATCH"
+            exit 1
+          fi
 
       - name: Check JavaScript syntax
         run: |
@@ -68,15 +77,32 @@ jobs:
 
     steps:
       - name: Check out tagged version
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.ref }}
 
-      - name: Create extension ZIP
+      - name: Prepare release package
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
         run: |
-          VERSION="${GITHUB_REF_NAME}"
-          git archive --format=zip --output="onion-names-${VERSION}.zip" HEAD \
-            manifest.json README.md LICENSE icons js options
+          VERSION="${RELEASE_TAG#v}"
+          mkdir dist
+          cp -R manifest.json README.md LICENSE icons js options dist/
+
+          jq --arg version "$VERSION" '.version = $version' \
+            dist/manifest.json > dist/manifest.tmp
+          mv dist/manifest.tmp dist/manifest.json
+
+          PACKAGE_VERSION="$(jq -r '.version' dist/manifest.json)"
+          if [[ "$PACKAGE_VERSION" != "$VERSION" ]]; then
+            echo "Packaged manifest version ($PACKAGE_VERSION) does not match tag version ($VERSION)"
+            exit 1
+          fi
+
+          PACKAGE="onion-names-v${VERSION}.zip"
+          (cd dist && zip -r "../$PACKAGE" manifest.json README.md LICENSE icons js options)
+
+          echo "Created $PACKAGE with manifest version $PACKAGE_VERSION"
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
