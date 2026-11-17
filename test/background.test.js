@@ -125,21 +125,21 @@ test("accepts aliases at the minimum and maximum supported lengths", async () =>
   const aliases = {
     "a.alt": onionAddress,
     "ab.alt": onionAddress,
-    `${"a".repeat(63)}.alt`: onionAddress,
+    [`a`.repeat(63) + ".alt"]: onionAddress,
   };
   const listeners = await createBackground(aliases);
 
   assert.equal(request(listeners, "a.alt").redirectUrl, `https://${onionAddress}/`);
   assert.equal(request(listeners, "ab.alt").redirectUrl, `https://${onionAddress}/`);
   assert.equal(
-    request(listeners, `${"a".repeat(63)}.alt`).redirectUrl,
+    request(listeners, "a".repeat(63) + ".alt").redirectUrl,
     `https://${onionAddress}/`,
   );
 });
 
 test("rejects aliases longer than 63 characters and invalid label syntax", async () => {
   const invalidAliases = [
-    `${"a".repeat(64)}.alt`,
+    "a".repeat(64) + ".alt",
     "-leading.alt",
     "trailing-.alt",
     "has_underscore.alt",
