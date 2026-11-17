@@ -1,8 +1,8 @@
 # OnionNames
 
-Create local, human-readable aliases for Tor onion services.
+Create local, human-readable aliases for Tor onion services. OnionNames resolves those aliases inside the browser by rewriting matching request hostnames to their mapped v3 onion addresses.
 
-OnionNames lets you define aliases such as `ddg.alt` and redirects requests to the corresponding v3 onion hostname. Mappings are stored locally in `browser.storage.local`; they are not synchronized or sent to a remote service.
+Mappings stay in the browser's local extension storage. OnionNames does not collect or transmit user data, and it does not use a remote lookup service, proxy, analytics, or telemetry.
 
 ## How hostname mapping works
 
@@ -28,7 +28,16 @@ OnionNames validates hostname syntax only. It does not look up DNS records, cont
 
 ## Privacy and permissions
 
-Alias lookup and URL rewriting happen locally in the browser. OnionNames does not send your mappings or browsing data to an OnionNames-operated remote service. The extension does need browser permission to observe and handle requests to `.alt` hostnames so it can rewrite known aliases and cancel unknown ones. The browser's extension-permission prompt and settings control that access.
+OnionNames works locally in your browser:
+
+- Alias mappings are stored in `browser.storage.local` and are not synchronized by the extension.
+- Matching `.alt` requests are inspected locally so known aliases can be rewritten and unknown aliases can be cancelled.
+- OnionNames does not collect or transmit personal data, browsing history, alias mappings, analytics, or telemetry to the developer or a third party.
+- There is no OnionNames-operated remote lookup service or proxy.
+
+The extension requests access to `storage`, `webRequest`, `webRequestBlocking`, and the `*://*.alt/*` host pattern. These permissions are required to store mappings and handle requests in the alias namespace. See [PRIVACY.md](PRIVACY.md) for the full privacy policy.
+
+When you visit a mapped alias, your browser connects to the destination onion service through its configured Tor network. That connection is separate from any data collection by OnionNames.
 
 ## Managing mappings
 
