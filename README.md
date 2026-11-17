@@ -24,11 +24,15 @@ The scheme, port, path, query string, and fragment are preserved. OnionNames cha
 
 Aliases are single DNS labels: dots are not allowed in the alias itself. Subdomains are not separate mappings. A request for an unknown `.alt` alias is cancelled so it is not sent to ordinary hostname resolution.
 
-OnionNames validates hostname syntax only. It does not look up DNS records, contact onion services, or check whether a service exists or supports a requested subdomain.
+OnionNames validates hostname syntax only. It does not look up DNS records, contact onion services to verify them, or check whether a service exists or supports a requested subdomain.
+
+## Privacy and permissions
+
+Alias lookup and URL rewriting happen locally in the browser. OnionNames does not send your mappings or browsing data to an OnionNames-operated remote service. The extension does need browser permission to observe and handle requests to `.alt` hostnames so it can rewrite known aliases and cancel unknown ones. The browser's extension-permission prompt and settings control that access.
 
 ## Managing mappings
 
-Click the OnionNames toolbar button to open the mapping manager in a tab. Mappings are listed alphabetically. You can add, edit, delete, and search by alias or onion address.
+Click the OnionNames toolbar button to open the mapping manager in a tab. Mappings are listed alphabetically. You can add, edit, delete, and search by alias. The search matches the alias label only; it does not search the `.alt` suffix or onion destination.
 
 The manager accepts:
 - An alias label containing letters, digits, and internal hyphens, followed by the fixed `.alt` suffix.
