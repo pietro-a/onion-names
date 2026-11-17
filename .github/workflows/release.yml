@@ -99,7 +99,7 @@ jobs:
             exit 1
           fi
 
-          PACKAGE="onion-names-v${VERSION}.zip"
+          PACKAGE="onion-names-${RELEASE_TAG}.zip"
           (cd dist && zip -r "../$PACKAGE" manifest.json README.md LICENSE icons js options)
 
           echo "Created $PACKAGE with manifest version $PACKAGE_VERSION"
