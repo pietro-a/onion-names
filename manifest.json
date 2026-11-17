@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "OnionNames",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Resolve human-readable .alt aliases to Tor onion services. Mappings stay in your browser; OnionNames collects or transmits no data.",
   "homepage_url": "https://github.com/pietro-a/onion-names",
   "icons": {
