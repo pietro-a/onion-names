@@ -10,7 +10,7 @@ and version numbers follow [Semantic Versioning](https://semver.org/).
 ### Added
 - Export all mappings to a versioned JSON backup file.
 - Import versioned JSON mapping files, merging additions and updates with existing mappings.
-- Copy buttons for local alias URLs, including the `http://` scheme.
+- Copy buttons beside aliases for local URLs, including the `http://` scheme.
 - Automated tests for mapping file validation, export, and import merging.
 
 ## [0.1.0] - 2026-11-21
