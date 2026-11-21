@@ -157,17 +157,13 @@
 
       aliasCell.className = "alias-cell";
 
-      const aliasText = document.createElement("span");
-      aliasText.className = "alias-text";
-      aliasText.textContent = alias;
-
-      const copy = document.createElement("button");
-      copy.type = "button";
-      copy.className = "copy-button";
-      copy.textContent = "Copy";
-      copy.title = "Copy http://" + alias;
-      copy.setAttribute("aria-label", "Copy http URL for " + alias);
-      copy.addEventListener("click", async () => {
+      const aliasCopy = document.createElement("button");
+      aliasCopy.type = "button";
+      aliasCopy.className = "alias-copy";
+      aliasCopy.textContent = alias;
+      aliasCopy.title = "Click to copy http://" + alias;
+      aliasCopy.setAttribute("aria-label", "Copy http URL for " + alias);
+      aliasCopy.addEventListener("click", async () => {
         try {
           await navigator.clipboard.writeText("http://" + alias);
           setMessage("http://" + alias + " copied.");
@@ -175,11 +171,7 @@
           setMessage("Could not copy alias URL: " + error.message, true);
         }
       });
-
-      const aliasContent = document.createElement("div");
-      aliasContent.className = "alias-content";
-      aliasContent.append(aliasText, copy);
-      aliasCell.append(aliasContent);
+      aliasCell.append(aliasCopy);
 
       onionCell.className = "onion-cell";
       onionCell.title = onion;
