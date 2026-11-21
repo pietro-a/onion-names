@@ -168,14 +168,14 @@
       const copy = document.createElement("button");
       copy.type = "button";
       copy.className = "copy-button";
-      copy.textContent = "Copy";
-      copy.setAttribute("aria-label", "Copy onion address for " + alias);
+      copy.textContent = "Copy alias URL";
+      copy.setAttribute("aria-label", "Copy http URL for " + alias);
       copy.addEventListener("click", async () => {
         try {
-          await navigator.clipboard.writeText(onion);
-          setMessage("Onion address copied for " + alias + ".");
+          await navigator.clipboard.writeText("http://" + alias);
+          setMessage("http://" + alias + " copied.");
         } catch (error) {
-          setMessage("Could not copy onion address: " + error.message, true);
+          setMessage("Could not copy alias URL: " + error.message, true);
         }
       });
 
