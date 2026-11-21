@@ -252,7 +252,7 @@
 
   function exportMappings() {
     const data = mappingData.createExport(aliases);
-    const blob = new Blob([JSON.stringify(data, null, 2) + "\\n"], {
+    const blob = new Blob([JSON.stringify(data, null, 2) + "\n"], {
       type: "application/json",
     });
     const url = URL.createObjectURL(blob);
@@ -277,7 +277,7 @@
         summary.updated + " updated, " +
         summary.unchanged + " unchanged.";
 
-      if (!window.confirm("Import mappings?\\n\\n" + details + "\\n\\nExisting mappings with the same alias will be updated.")) {
+      if (!window.confirm("Import mappings?\n\n" + details + "\n\nExisting mappings with the same alias will be updated.")) {
         setMessage("Import cancelled.");
         return;
       }
