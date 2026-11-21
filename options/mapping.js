@@ -17,6 +17,10 @@
   const cancelButton = document.getElementById("cancel-button");
   const deleteButton = document.getElementById("delete-button");
   const message = document.getElementById("message");
+  const exportButton = document.getElementById("export-button");
+  const importButton = document.getElementById("import-button");
+  const importFile = document.getElementById("import-file");
+  const mappingData = OnionNamesData;
 
   let aliases = {};
   let editingAlias = null;
@@ -152,11 +156,31 @@
         onionCell = document.createElement("td");
 
       aliasCell.className = "alias-cell";
-      aliasCell.textContent = alias;
+
+      const aliasCopy = document.createElement("button");
+      aliasCopy.type = "button";
+      aliasCopy.className = "alias-copy";
+      aliasCopy.textContent = alias;
+      aliasCopy.title = "Click to copy http://" + alias;
+      aliasCopy.setAttribute("aria-label", "Copy http URL for " + alias);
+      aliasCopy.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText("http://" + alias);
+          setMessage("http://" + alias + " copied.");
+        } catch (error) {
+          setMessage("Could not copy alias URL: " + error.message, true);
+        }
+      });
+      aliasCell.append(aliasCopy);
 
       onionCell.className = "onion-cell";
-      onionCell.textContent = onion;
       onionCell.title = onion;
+
+      const onionText = document.createElement("span");
+      onionText.className = "onion-text";
+      onionText.textContent = onion;
+
+      onionCell.append(onionText);
 
       const actionsCell = document.createElement("td"),
         actions = document.createElement("div");
@@ -222,6 +246,49 @@
     await browser.storage.local.set({ [STORAGE_KEY]: updated });
     aliases = updated;
     renderList();
+  }
+
+  function exportMappings() {
+    const data = mappingData.createExport(aliases);
+    const blob = new Blob([JSON.stringify(data, null, 2) + "\n"], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    const date = new Date().toISOString().slice(0, 10);
+
+    link.href = url;
+    link.download = "onionnames-mappings-" + date + ".json";
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setMessage("Mappings exported.");
+  }
+
+  async function importMappings(file) {
+    try {
+      const imported = mappingData.parseImport(await file.text());
+      const { mappings, summary } = mappingData.mergeMappings(aliases, imported);
+      const details =
+        summary.added + " added, " +
+        summary.updated + " updated, " +
+        summary.unchanged + " unchanged.";
+
+      if (!window.confirm("Import mappings?\n\n" + details + "\n\nExisting mappings with the same alias will be updated.")) {
+        setMessage("Import cancelled.");
+        return;
+      }
+
+      importButton.disabled = true;
+      await saveMappings(mappings);
+      setMessage("Import complete: " + details);
+    } catch (error) {
+      setMessage("Could not import mappings: " + error.message, true);
+    } finally {
+      importButton.disabled = false;
+      importFile.value = "";
+    }
   }
 
   async function deleteMapping(alias) {
@@ -305,6 +372,13 @@
   });
 
   search.addEventListener("input", renderList);
+
+  exportButton.addEventListener("click", exportMappings);
+  importButton.addEventListener("click", () => importFile.click());
+  importFile.addEventListener("change", () => {
+    const file = importFile.files && importFile.files[0];
+    if (file) importMappings(file);
+  });
 
   browser.storage.onChanged.addListener((changes, areaName) => {
     if (areaName !== "local" || !hasOwn(changes, STORAGE_KEY)) return;

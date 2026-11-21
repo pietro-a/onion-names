@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>OnionNames — Mappings</title>
     <link rel="stylesheet" href="mapping.css" />
+    <script src="mapping-data.js" defer></script>
     <script src="mapping.js" defer></script>
   </head>
   <body>
@@ -32,6 +33,11 @@
           autocomplete="off"
           spellcheck="false"
         />
+        <div class="mapping-tools">
+          <button id="export-button" type="button">Export mappings</button>
+          <button id="import-button" type="button">Import mappings</button>
+          <input id="import-file" type="file" accept=".json,application/json" hidden />
+        </div>
         <div class="table-wrap">
           <table>
             <thead>
