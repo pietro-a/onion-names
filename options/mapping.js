@@ -179,7 +179,10 @@
         }
       });
 
-      onionCell.append(onionText, copy);
+      const onionContent = document.createElement("div");
+      onionContent.className = "onion-content";
+      onionContent.append(onionText, copy);
+      onionCell.append(onionContent);
 
       const actionsCell = document.createElement("td"),
         actions = document.createElement("div");
