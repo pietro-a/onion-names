@@ -152,19 +152,19 @@ tbody tr + tr {
 }
 .alias-cell {
   font-weight: 600;
-  overflow-wrap: anywhere;
 }
-.onion-content {
+.alias-content {
   display: flex;
   align-items: center;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 6px 8px;
   min-width: 0;
 }
-.onion-text {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.alias-text {
+  overflow-wrap: anywhere;
+}
+.onion-cell {
+  overflow-wrap: anywhere;
   font-family: ui-monospace, monospace;
   font-size: 12px;
 }
