@@ -140,7 +140,7 @@ th {
 }
 th:first-child,
 td:first-child {
-  width: 34%;
+  width: 38%;
   min-width: 180px;
 }
 th:last-child,
