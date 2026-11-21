@@ -41,11 +41,29 @@ When you visit a mapped alias, your browser connects to the destination onion se
 
 ## Managing mappings
 
-Click the OnionNames toolbar button to open the mapping manager in a tab. Mappings are listed alphabetically. You can add, edit, delete, and search by alias. The search matches the alias label only; it does not search the `.alt` suffix or onion destination.
+Click the OnionNames toolbar button to open the mapping manager in a tab. Mappings are listed alphabetically. You can add, edit, delete, and search by alias. The search matches the alias label only; it does not search the `.alt` suffix or onion destination. Use the Copy button beside an onion address to copy its full hostname.
 
 The manager accepts:
 - An alias label containing letters, digits, and internal hyphens, followed by the fixed `.alt` suffix.
 - A v3 onion hostname containing exactly 56 Base32 characters (`a-z` and `2-7`), followed by the fixed `.onion` suffix.
+
+### Backing up and restoring mappings
+
+Use **Export mappings** to download all valid mappings as a JSON file, regardless of the current search filter. The file uses a versioned format:
+
+```json
+{
+  "format": "onionnames-mappings",
+  "version": 1,
+  "aliases": {
+    "ddg.alt": "duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion"
+  }
+}
+```
+
+Use **Import mappings** to restore a backup or add mappings from another OnionNames installation. Import merges with existing mappings: new aliases are added, aliases with different destinations are updated from the file, and identical mappings are left unchanged. The manager displays a summary and asks for confirmation before saving. The entire file is validated first; malformed files, unsupported format versions, and empty imports are rejected without changing stored mappings.
+
+Keep exported files somewhere safe. They contain your local alias list, even though OnionNames itself does not transmit that data.
 
 ## Using aliases
 
