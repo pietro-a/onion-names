@@ -153,28 +153,30 @@ tbody tr + tr {
 .alias-cell {
   font-weight: 600;
 }
-.alias-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  min-width: 0;
-}
-.alias-text {
-  min-width: 0;
+.alias-copy {
+  display: inline-block;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+  font-weight: inherit;
+  text-align: left;
   overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.alias-copy:hover {
+  background: transparent;
+  text-decoration: underline;
+}
+.alias-copy:focus-visible {
+  border-radius: 2px;
 }
 .onion-cell {
   overflow-wrap: anywhere;
   font-family: ui-monospace, monospace;
   font-size: 12px;
-}
-.copy-button {
-  flex: 0 0 auto;
-  min-height: 28px;
-  padding: 3px 8px;
-  font-size: 12px;
-  font-weight: 400;
 }
 .row-actions {
   display: flex;
