@@ -41,7 +41,7 @@ When you visit a mapped alias, your browser connects to the destination onion se
 
 ## Managing mappings
 
-Click the OnionNames toolbar button to open the mapping manager in a tab. Mappings are listed alphabetically. You can add, edit, delete, and search by alias. The search matches the alias label only; it does not search the `.alt` suffix or onion destination. Use **Copy alias URL** beside a mapping to copy its local address, including the `http://` scheme (for example, `http://ddg.alt`).
+Click the OnionNames toolbar button to open the mapping manager in a tab. Mappings are listed alphabetically. You can add, edit, delete, and search by alias. The search matches the alias label only; it does not search the `.alt` suffix or onion destination. Use **Copy** beside an alias to copy its local address, including the `http://` scheme (for example, `http://ddg.alt`).
 
 The manager accepts:
 - An alias label containing letters, digits, and internal hyphens, followed by the fixed `.alt` suffix.
