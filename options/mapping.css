@@ -108,6 +108,12 @@ section {
   border-radius: 3px;
   background: Field;
 }
+.mapping-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
 .table-wrap {
   margin-top: 12px;
   overflow-x: auto;
@@ -116,7 +122,7 @@ section {
 }
 table {
   width: 100%;
-  min-width: 520px;
+  min-width: 600px;
   border-collapse: collapse;
   table-layout: fixed;
 }
@@ -149,10 +155,23 @@ tbody tr + tr {
   overflow-wrap: anywhere;
 }
 .onion-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.onion-text {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: ui-monospace, monospace;
+  font-size: 12px;
+}
+.copy-button {
+  flex: 0 0 auto;
+  min-height: 28px;
+  padding: 3px 8px;
   font-size: 12px;
 }
 .row-actions {
